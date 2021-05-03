@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             override fun onProgressChanged(seekBar: SeekBar, value: Int, b: Boolean) {
                 // Display the current progress of SeekBar
-                tv_threshold.text = "$value"
+                tv_threshold.text = "Value: $value"
                 currentThreshold = value
             }
 
@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // Nothing to do
-
             }
         })
 
@@ -122,12 +121,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 tv_accelerometer.text = "X: $x" + ", Y: $y" + ", Z: $z"
 
+                // To detect shake movement
                 shakeDetection(x, y, z)
-
-                //if(toggle && (Math.abs(prevY - gravity[1]) > threshold) && !ignore){
-
-                //}
-
 
                 // To measure the real acceleration of the device, the contribution of the force of
                 // gravity must be removed from the accelerometer data.
@@ -204,7 +199,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
 
-    
+
 
     override fun onResume() {
         super.onResume()
