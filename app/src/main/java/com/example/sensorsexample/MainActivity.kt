@@ -17,9 +17,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val TAG = "MainActivity"
 
-    var myMediaPlayer : MediaPlayer? = null
+    private var myMediaPlayer : MediaPlayer? = null
 
-    var currentThreshold = 0
+    private var currentThreshold = 0
+
+    private val MINIMUM_SENSITIVITY = 10
+
 
     private lateinit var sensorManager: SensorManager
     private var mLight: Sensor? = null
@@ -27,7 +30,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var mGyroscope: Sensor? = null
     private var mMagneticField: Sensor? = null
     private var mProximity: Sensor? = null
-
     private var mGravity: Sensor? = null
 
 
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun initializeSeekBar() {
 
         val seekBar = findViewById<SeekBar>(R.id.seekBar)
-        currentThreshold = seekBar.max
+        currentThreshold = seekBar.max + MINIMUM_SENSITIVITY
         Log.d(TAG, "currentThreshold:$currentThreshold ")
 
         // Set a SeekBar change listener
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             override fun onProgressChanged(seekBar: SeekBar, value: Int, b: Boolean) {
                 // Display the current progress of SeekBar
                 tv_threshold.text = "Value: $value"
-                currentThreshold = value
+                currentThreshold = value + MINIMUM_SENSITIVITY
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
